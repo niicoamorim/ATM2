@@ -103,10 +103,21 @@ if respcliente == 'S':
 
           if operacao == 4:
               contatransf = int(input('Digite a conta para transferir:'))
-              for c in range(0, len(contas)):
+              vlrdep = int(input('Digite o valor a ser transferido:'))
+              pos = contas.index(verifconta)
+              pos2 = contas.index(contatransf)
+              s1 = saldo[pos]
+              s2 = saldo[pos2]
+              if s1 < vlrdep:
+                  print('Transferencia impossível:')
+              else:
+               for c in range(0, len(contas)):
                   if contatransf == c:
-                      print(c)
-              print( 'O seu saldo da conta',contas[pos],' é ',saldo[pos])
+                   p1 = pos
+                   p2 = pos2
+                   saldo.insert(s1, s1-vlrdep)
+                   saldo.insert(s2, s2+vlrdep)
+
 
 
          else:
