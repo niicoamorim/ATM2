@@ -1,6 +1,7 @@
 contas = []
 saldo = []
 vlrdep = int()
+vlrtransf = int()
 vlrsaque = int()
 vl = int()
 vlp = int()
@@ -50,7 +51,7 @@ if respcliente == 'N':
            print('NICOLAS BANK lhe deseja sucesso.')
 
 
-if respcliente == 'S':
+while respcliente == 'S':
         while verifconta not in contas or tentlogin == 0:
          verifconta = str( input( 'Digita sua conta. Você ainda possui {} dentativas'.format( tentlogin ) ) )
          print( 'Login efetuado com sucesso.' )
@@ -60,38 +61,29 @@ if respcliente == 'S':
           operacao = int(input('Digite 1 para saldo, 2 para depósito, 3 para saque, 4 para transferencia ou 5 para sair:'))
 
           if operacao == 1:
-           pos = contas.index(verifconta)
-           print('Seu saldo é {}'.format( saldo[pos]))
+            pos = contas.index(verifconta)
+            print('Seu saldo é {}'.format( saldo[pos]))
 
 
           if operacao == 2:
               vlrdep = bool(input('Digite o valor a ser depositado:'))
               pos = contas.index(verifconta)
-              print(pos)
-              vl = saldo[pos]
-              vlp = saldo[pos]+vlrdep
-              print(vlp)
-              saldo.insert(pos, vl+vlrdep)
-              print('Seu saldo atual é : R$',saldo[pos])
+              s1 = saldo[pos]
+              saldo.insert(s1, s1+vlrdep)
+              print(f'Seu saldo é {saldo[s1]}.')
+              respcliente = 'S'
 
           while operacao == 3:
             print('Você optou para opção de saque')
             vlrsaque = int(input('Quanto vc deseja sacar?'))
             pos = contas.index(verifconta)
-            if vlrsaque <= 0:
-                print('Valor de saque impossível.')
-                voltarsaque = str(input('Deseja tentar novamente?'))
-                if voltarsaque == 'S':
-                 operacao = 3
-                else:
-                 break
-
-
+            s1 = saldo[pos]
             if vlrsaque > saldo[pos]:
                  print('Saldo insuficiente. Deseja tentar novamente?')
 
             if vlrsaque <= saldo[pos]:
-                saldo[pos] = saldo[pos] - vlrsaque
+                saldo.insert(s1, s1-vlrsaque)
+                print(f'Seu novo saldo é {saldo[1]}.')
 
                 opnovosaque = str(input('Deseja realizar um novo saque? S/N.'))
                 if opnovosaque == 'S':
@@ -103,7 +95,7 @@ if respcliente == 'S':
 
           if operacao == 4:
               contatransf = int(input('Digite a conta para transferir:'))
-              vlrdep = int(input('Digite o valor a ser transferido:'))
+              vlrtransf = int(input('Digite o valor a ser transferido:'))
               pos = contas.index(verifconta)
               pos2 = contas.index(contatransf)
               s1 = saldo[pos]
@@ -115,8 +107,8 @@ if respcliente == 'S':
                   if contatransf == c:
                    p1 = pos
                    p2 = pos2
-                   saldo.insert(s1, s1-vlrdep)
-                   saldo.insert(s2, s2+vlrdep)
+                   saldo.insert(s1, s1-vlrtransf)
+                   saldo.insert(s2, s2+vlrtransf)
 
 
 
